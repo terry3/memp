@@ -43,6 +43,7 @@ typedef unsigned char  T_TOGGLE;
 #define NULL_UINT32 0xFFFFFFFF
 #define NULL_UINT16 0xFFFF
 #define NULL_UINT8  0xFF
+#define MEMP_MAGIC  0x1234321
 
 /* return if p is null */
 #define PN_RET_N(p) \
@@ -84,6 +85,14 @@ typedef unsigned char  T_TOGGLE;
         return (_ret);          \
     }
 
+#define FR_CRET(_ret, _reti)                     \
+    if (F_SUCCESS != (_ret))                    \
+    {                                           \
+  printf("[%s]:[%s]:(%d):Null pointer.\n",      \
+  __FILE__, __FUNCTION__, __LINE__);            \
+        return (_reti);                         \
+    }
+
 #define FR_BRK(_ret) \
     if (T_OK != (_ret))         \
     {                           \
@@ -120,6 +129,18 @@ typedef unsigned char  T_TOGGLE;
 /* find the right struct pointer */
 #define F_GETSP(_addr, _type, _field) \
     ((_type*)((unsigned char*)(_addr) - (unsigned long)&((_type*)0)->_field))
+
+
+#define F_ZERO(_addr, _size) \
+    (T_VOID)memset((_addr), 0, (_size))
+
+#define F_IS_MAGIC(_magic) \
+    ((_magic) == MEMP_MAGIC)
+
+#define F_CHK_MAGIC(_memp, _ret)                \
+    if (!F_IS_MAGIC((_memp)->ul_magic)) {       \
+        return (_ret);                          \
+    }
 
 #ifdef __cplusplus
 }

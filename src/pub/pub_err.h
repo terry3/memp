@@ -8,8 +8,9 @@ extern "C"{
 enum Pub_err
 {
     PUB_ERR_BEGIN = 1,
-    NULL_PTR,
-    MEM_ALLOC_FAIL,
+    MEMP_NULL_PTR,
+    MEMP_ALLOC_FAIL,
+    MEMP_MAGIC_CHK_FAIL,
     
     MEMP_LIST_ERR_BEGIN = 100,
     MEMP_LIST_EMPTY,
