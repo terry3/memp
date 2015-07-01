@@ -142,6 +142,11 @@ typedef unsigned char  T_TOGGLE;
         return (_ret);                          \
     }
 
+#define F_CHK_MAGIC_N(_memp)                    \
+    if (!F_IS_MAGIC((_memp)->ul_magic)) {       \
+        return ;                                \
+    }
+
 #ifdef __cplusplus
 }
 #endif

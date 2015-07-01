@@ -5,9 +5,6 @@
 extern "C"{
 #endif
 
-typedef T_VOID* (*Memp_a)(T_UINT32 tag, T_UINT32 size);
-typedef F_RET   (*Memp_f)();
-
 /* Memp memerory control point */
 typedef void* Memp;
 
@@ -22,8 +19,14 @@ extern T_VOID* memp_alloc
     Memp     ps_memp,
     T_UINT32 ul_size
 );
-
-//extern F_RET memp_free(Memp memp);
+extern T_VOID memp_dump
+(
+    Memp ps_memp_in
+);
+extern T_VOID memp_delete
+(
+    Memp *ps_memp_in
+);
 
 #ifdef __cplusplus
 }
